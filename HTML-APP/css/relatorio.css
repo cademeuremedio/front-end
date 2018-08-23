@@ -1,0 +1,22 @@
+.relatorio {
+	background-color: #FCE457;
+
+}
+
+.relatorio a spam{
+	color: #1F6365;
+}
+
+
+.menu-relatorio li  {
+	width: 49%;
+}
+
+.menu.menu-relatorio li a {
+	width: 100%;
+	padding: 25px;
+}
+
+.menu-relatorio li a:active {
+	background-color: #1F6365;
+}

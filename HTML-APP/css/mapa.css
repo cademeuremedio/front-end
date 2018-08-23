@@ -1,0 +1,29 @@
+.logotipo-menor img {
+	width: 50%;
+}
+
+
+.informacoes-busca{
+	padding: 10px 0 10px 0;
+	background-color: #45AEB1;
+	color: white;
+}
+
+.botao-reclamar {
+	background-color: #BE5E9F;
+	color: white;
+	text-align: center;
+	border-radius: 15px;
+	padding: 10px 2px 10px 2px;
+	width: 80%;
+	max-width: 150px;
+	font-size: 0.8em;
+}
+
+.botao-reclamar p spam {
+	color: white;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	line-height: 1.5em;
+
+}

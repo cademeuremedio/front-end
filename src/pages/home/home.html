@@ -1,0 +1,74 @@
+<ion-header id='header' class='header' style="background-color: white; width: 100%; z-index:9999; padding-bottom: 10px;"> 
+  <div style="background: rgba(255,255,255,1); text-align: center; max-width: 700px; width: 100%; margin: auto; display: block; padding: 10px 0 0px 0;">
+      <img src="assets/imgs/logo-new.png" width="50%">
+  </div>
+  <div style="background: rgba(255,255,255,0.8); text-align: center; max-width: 700px; width: 100%; margin: auto; display: block;">
+      <div *ngIf="!mapView"  style="font-size: 16px;">
+          <p>Quer saber se tem de graça? <b style="color: #BE5E9F;">Pesquise.</b><br/>
+          Não tem no posto de saúde? <b style="color: #BE5E9F;">Reclame.</b></p>
+    </div>
+    <div *ngIf="mapView"  style="font-size: 16px;">
+          <p><b style="color: #BE5E9F; white-space: nowrap; overflow: hidden; display: block; text-overflow: ellipsis;">{{search}}</b>é de graça! Veja onde encontrar:</p>
+    </div>
+  </div>
+
+  <div style="width: 80%;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;">
+    <ion-input *ngIf="!mapView" placeholder="Informe o nome do remédio desejado" [(ngModel)]="search" (input)="filterItems()" style="border-radius: 10px;
+    padding: 0px;
+    font-size: 1.2em;
+    border: solid 2px #45AEB1;"></ion-input>
+
+    <div *ngIf="mapView" style="width: 100%;margin: auto;display: block;text-align: right;color: #FFF;height: 0;">
+      <button (click)="deselectItem();" style="z-index: 9999;float: right;margin-top: 4px;font-size:28px;border-radius: 6px;padding: 3px 11px;margin-right: -1px;background: #BE5E9F;color: #FFF;position: absolute;margin-right: 0;margin-left: -45px;">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+
+    <input disabled="disabled" *ngIf="mapView" [(ngModel)]="search" (input)="filterItems()" style="border-radius: 10px;
+    padding: 12px 10px;
+    width: 100%;
+    font-size: 1.2em;
+    border: solid 2px #45AEB1;"/>
+
+    <!--div style="position: absolute;z-index:1;width:90%;color: red;margin-top:  5px;font-size: 16px;font-weight: bold;">
+      {{error}}
+    </div-->
+
+    <div no-padding *ngIf="error">
+      <ion-grid ion-fixed no-padding>
+        <ion-list style="position: absolute;z-index:1;width:100%;">
+          <ion-item color="red">
+            <span style="font-size: 12px;">{{error}}</span>
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+    </div>
+
+    <div style="position: absolute;z-index:1;width:90%;color: blue;margin-top:  5px;font-size: 16px;font-weight: bold;">
+      {{info}}
+    </div>
+    <div no-padding *ngIf="showSugest">
+      <ion-grid ion-fixed no-padding>
+        <ion-list style="position: absolute;z-index:1;width:100%;">
+          <ion-item *ngFor="let row of filtereditems" color="silver" (click)="selectItem(row);">
+            <span style="font-size: 12px;">{{row.remedio}} {{(row.comercial?'('+row.comercial+')':'')}}</span>
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+    </div>
+  </div>
+
+
+</ion-header>
+<ion-content>
+  <div #map id="map" style="z-index:9998;"></div>
+  <button style=" position: absolute; right: 10px; top: 10px; z-index: 9999; background-color: white; color: #000;" ion-button icon-only (click) ="resetCenter()">
+  <ion-icon name="md-locate"></ion-icon>
+</button>
+  <button *ngIf="mapView" style=" position: absolute; left: 10px; top: 10px; z-index: 9999; background-color: white; color: #000;" ion-button icon-only (click) ="buscarPostos()">
+  <ion-icon name="md-refresh"></ion-icon>
+</button>
+</ion-content>
